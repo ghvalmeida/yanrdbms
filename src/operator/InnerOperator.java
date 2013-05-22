@@ -3,7 +3,7 @@
  */
 package operator;
 
-import memorymanager.TupleBuffer;
+import core.Tuple;
 
 /**
  * @author valmeida
@@ -43,5 +43,5 @@ public abstract class InnerOperator extends Operator {
 	 * Returns the next bunch of tuples.
 	 * Remark: hasNext() should be called first.
 	 */
-	abstract public TupleBuffer next();
+	abstract public Tuple next();
 }

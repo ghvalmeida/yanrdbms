@@ -9,9 +9,10 @@ import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
+import core.Tuple;
+
 import exception.DatabaseException;
 
-import memorymanager.TupleBuffer;
 import operator.InnerOperator;
 
 /**
@@ -42,7 +43,7 @@ public class TextFileScan extends InnerOperator {
 	}
 
 	@Override
-	public TupleBuffer next() {
+	public Tuple next() {
 		// TODO Auto-generated method stub
 		return null;
 	}

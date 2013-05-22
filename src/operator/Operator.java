@@ -4,7 +4,6 @@
 package operator;
 
 import exception.DatabaseException;
-import memorymanager.TupleBuffer;
 
 /**
  * @author valmeida

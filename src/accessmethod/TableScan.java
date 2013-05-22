@@ -3,7 +3,7 @@
  */
 package accessmethod;
 
-import memorymanager.TupleBuffer;
+import core.Tuple;
 import operator.InnerOperator;
 
 /**
@@ -18,7 +18,7 @@ public final class TableScan extends InnerOperator {
 	}
 
 	@Override
-	public TupleBuffer next() {
+	public Tuple next() {
 		// TODO Auto-generated method stub
 		return null;
 	}

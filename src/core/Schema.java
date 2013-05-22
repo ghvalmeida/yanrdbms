@@ -4,6 +4,7 @@
 package core;
 
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.List;
 
 import util.Pair;
@@ -21,6 +22,14 @@ public class Schema implements Serializable {
   /** 
    * The types of the columns in this relation. 
    **/
-  private final List<Pair<String, Type>> attrTypes = null;  
+  private final List<Pair<String, Type>> attrTypes = null;
+  
+  public int numAttrs() {
+	  return attrTypes.size();
+  }
+  
+  public Iterator<Pair<String, Type>> getAttrTypes() {
+	  return attrTypes.iterator();
+  }
 	
 }

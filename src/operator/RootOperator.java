@@ -3,7 +3,8 @@
  */
 package operator;
 
-import memorymanager.TupleBuffer;
+import core.Tuple;
+
 
 /**
  * @author valmeida
@@ -27,8 +28,8 @@ abstract public class RootOperator<T> extends Operator {
 	private void consume(final T to) {
 		assert(children.length == 1);
 		while(children[0].hasNext()) {
-			final TupleBuffer tb = children[0].next();
-			consumeTo(tb, to);
+			final Tuple tuple = children[0].next();
+			consumeTo(tuple, to);
 		}
 	}
 	
@@ -38,5 +39,5 @@ abstract public class RootOperator<T> extends Operator {
 	 * @param tb the bunch of tuples.
 	 * @param to where to write to.
 	 */
-	abstract protected void consumeTo(final TupleBuffer tb, final T to);
+	abstract protected void consumeTo(final Tuple tuple, final T to);
 }
