@@ -4,7 +4,6 @@
 package core;
 
 import java.io.Serializable;
-import java.util.Iterator;
 import java.util.List;
 
 import util.Pair;
@@ -28,8 +27,12 @@ public class Schema implements Serializable {
 	  return attrTypes.size();
   }
   
-  public Iterator<Pair<String, Type>> getAttrTypes() {
-	  return attrTypes.iterator();
+  public final String getAttrName(final int i) {
+	  return attrTypes.get(i).getLeft();
   }
-	
+
+  public final Type getAttrType(final int i) {
+	  return attrTypes.get(i).getRight();
+  }
+  
 }

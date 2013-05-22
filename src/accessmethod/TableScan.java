@@ -3,6 +3,7 @@
  */
 package accessmethod;
 
+import core.Schema;
 import core.Tuple;
 import operator.InnerOperator;
 
@@ -12,13 +13,13 @@ import operator.InnerOperator;
  */
 public final class TableScan extends InnerOperator {
 
-	public TableScan(InnerOperator[] children) {
-		super(children);
+	public TableScan(final Schema outputSchema, final InnerOperator[] children) {
+		super(outputSchema, children);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public Tuple next() {
+	public final Tuple next() {
 		// TODO Auto-generated method stub
 		return null;
 	}

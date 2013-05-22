@@ -3,6 +3,7 @@
  */
 package operator;
 
+import core.Schema;
 import core.Tuple;
 
 /**
@@ -10,6 +11,10 @@ import core.Tuple;
  *
  */
 public abstract class InnerOperator extends Operator {
+	/*
+	 * The schema of the output tuples.
+	 */
+	private final Schema outputSchema;	
 	/*
 	 * A flag indicating whether there are still tuples to be returned.
 	 */
@@ -20,15 +25,25 @@ public abstract class InnerOperator extends Operator {
 	 * 
 	 * @param children the children operators.
 	 */
-	public InnerOperator(final InnerOperator[] children) {
+	public InnerOperator(final Schema outputSchema, final InnerOperator[] children) {
 		super(children);
+		this.outputSchema = outputSchema;
 		this.hasNext = false;
 	}
 	
+	/**
+	 * Getter for attribute outputSchema.
+	 * 
+	 * @return the outputSchema
+	 */
+	public final Schema getOutputSchema() {
+		return outputSchema;
+	}
+
 	/*
 	 * Checks whether there are still tuples to be returned.
 	 */
-	public Boolean hasNext() {
+	public final Boolean hasNext() {
 		return hasNext;
 	}
 
