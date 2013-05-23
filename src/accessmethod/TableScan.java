@@ -19,7 +19,13 @@ public final class TableScan extends InnerOperator {
 	}
 
 	@Override
-	public final Tuple next() {
+	public Boolean hasNext() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public Tuple next() {
 		// TODO Auto-generated method stub
 		return null;
 	}

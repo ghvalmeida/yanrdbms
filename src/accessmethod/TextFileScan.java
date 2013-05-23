@@ -54,6 +54,12 @@ public class TextFileScan extends InnerOperator {
 	}
 
 	@Override
+	public Boolean hasNext() {
+		return scanner.hasNextLine();
+		
+	}
+
+	@Override
 	public final Tuple next() {
 		if (scanner.hasNextLine()) {
 			Scanner tokenizer = new Scanner(scanner.nextLine());

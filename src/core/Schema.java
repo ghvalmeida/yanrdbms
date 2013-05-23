@@ -21,7 +21,16 @@ public class Schema implements Serializable {
   /** 
    * The types of the columns in this relation. 
    **/
-  private final List<Pair<String, Type>> attrTypes = null;
+  private final List<Pair<String, Type>> attrTypes;
+  
+  /**
+   * The constructor.
+   * 
+   * @param attrTypes the list of attribute types.
+   */
+  public Schema(final List<Pair<String, Type>> attrTypes) {
+	  this.attrTypes = attrTypes;
+  }
   
   /**
    * 

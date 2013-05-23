@@ -10,7 +10,7 @@ import core.Tuple;
  * @author valmeida
  *
  */
-abstract public class RootOperator<T> extends Operator {
+abstract public class RootOperator extends Operator {
 
 	/*
 	 * The constructor
@@ -25,11 +25,11 @@ abstract public class RootOperator<T> extends Operator {
 	 * The consume operation.
 	 * Calls the consumeTo to actually write a bunch of tuples.
 	 */
-	private void consume(final T to) {
+	public void consume() {
 		assert(children.length == 1);
 		while(children[0].hasNext()) {
 			final Tuple tuple = children[0].next();
-			consumeTo(tuple, to);
+			consumeTuple(tuple);
 		}
 	}
 	
@@ -39,5 +39,5 @@ abstract public class RootOperator<T> extends Operator {
 	 * @param tb the bunch of tuples.
 	 * @param to where to write to.
 	 */
-	abstract protected void consumeTo(final Tuple tuple, final T to);
+	abstract protected void consumeTuple(final Tuple tuple);
 }

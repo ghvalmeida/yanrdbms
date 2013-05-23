@@ -15,10 +15,6 @@ public abstract class InnerOperator extends Operator {
 	 * The schema of the output tuples.
 	 */
 	private final Schema outputSchema;	
-	/*
-	 * A flag indicating whether there are still tuples to be returned.
-	 */
-	private Boolean hasNext;	
 
 	/*
 	 * The constructor
@@ -28,7 +24,6 @@ public abstract class InnerOperator extends Operator {
 	public InnerOperator(final Schema outputSchema, final InnerOperator[] children) {
 		super(children);
 		this.outputSchema = outputSchema;
-		this.hasNext = false;
 	}
 	
 	/**
@@ -43,16 +38,7 @@ public abstract class InnerOperator extends Operator {
 	/*
 	 * Checks whether there are still tuples to be returned.
 	 */
-	public final Boolean hasNext() {
-		return hasNext;
-	}
-
-	/*
-	 * Checks whether there are still tuples to be returned.
-	 */
-	public void finish() {
-		hasNext = false;
-	}
+	abstract public Boolean hasNext();
 	
 	/*
 	 * Returns the next bunch of tuples.
