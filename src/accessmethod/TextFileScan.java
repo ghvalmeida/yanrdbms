@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 import core.Schema;
@@ -29,9 +30,12 @@ public class TextFileScan extends InnerOperator {
 	private final String filename;
 	private final String separator;
 	private Scanner scanner;
+	private Schema outputSchema;
 	
 	public TextFileScan(final Schema outputSchema, final String filename, final String separator) {
 		super(outputSchema, null);
+		Objects.requireNonNull(outputSchema);
+		Objects.requireNonNull(filename);
 		this.filename = filename;
 		this.separator = separator;
 		this.scanner = null;
@@ -41,7 +45,9 @@ public class TextFileScan extends InnerOperator {
 	public void open() throws DatabaseException {
 		try{
 		    scanner = new Scanner(new BufferedReader(new InputStreamReader(new FileInputStream(filename))));
-		    scanner.useDelimiter(separator);
+		    if(separator != null) {
+		    	scanner.useDelimiter(separator);
+		    }
 		} catch(FileNotFoundException e) {
 			throw new DatabaseException("File " + filename + " not found.");
 		}
@@ -56,7 +62,7 @@ public class TextFileScan extends InnerOperator {
 				final Field<?> f = getNextAttribute(tokenizer, getOutputSchema().getAttrType(i));
 				fields.add(f);
 			}
-			return new Tuple(fields);
+			return new Tuple(outputSchema, fields);
 		}
 		return null;
 	}

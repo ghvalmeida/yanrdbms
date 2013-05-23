@@ -33,6 +33,11 @@ public class Field<T> implements Serializable {
 	public final T getValue() {
 		return value;
 	}
+	
+	@Override
+	public String toString() {
+		return value.toString();
+	}
 
 
 }
