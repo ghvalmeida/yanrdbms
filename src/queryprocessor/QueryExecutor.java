@@ -32,6 +32,7 @@ public class QueryExecutor {
 	 * @throws DatabaseException
 	 */
 	public void execute() throws DatabaseException {
+		operator.open();
 		operator.consume();
 	}
 }

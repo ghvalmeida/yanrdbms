@@ -30,7 +30,6 @@ public class TextFileScan extends InnerOperator {
 	private final String filename;
 	private final String separator;
 	private Scanner scanner;
-	private Schema outputSchema;
 	
 	public TextFileScan(final Schema outputSchema, final String filename, final String separator) {
 		super(outputSchema, null);
@@ -68,7 +67,7 @@ public class TextFileScan extends InnerOperator {
 				final Field<?> f = getNextAttribute(tokenizer, getOutputSchema().getAttrType(i));
 				fields.add(f);
 			}
-			return new Tuple(outputSchema, fields);
+			return new Tuple(getOutputSchema(), fields);
 		}
 		return null;
 	}

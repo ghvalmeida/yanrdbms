@@ -1,5 +1,7 @@
 package operator;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,9 +38,11 @@ public class ToScreenTest {
 	}
 
 	@Test
-	public void test() throws DatabaseException {
+	public void test() throws DatabaseException, IOException {
 		
-		TextFileScan textFileScan = new TextFileScan(schema, "data/twitter/twitter.txt", null);
+		String current = new File( "." ).getCanonicalPath();
+        System.out.println("Current dir:" + current);
+		TextFileScan textFileScan = new TextFileScan(schema, current + "/data/twitter/twitter.txt", null);
 		InnerOperator innerOperator[] = { textFileScan };
 		ToScreen toScreen = new ToScreen( innerOperator );
 		QueryExecutor queryExecutor = new QueryExecutor( toScreen );
