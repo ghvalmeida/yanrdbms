@@ -9,19 +9,29 @@ import exception.DatabaseException;
  * @author valmeida
  *
  */
-public abstract class Operator {
+public abstract class QueryOperator {
 	/*
 	 * The children operators.
 	 */
-	protected final InnerOperator[] children;
+	protected final InnerQueryOperator[] children;
 
 	/*
 	 * The constructor
 	 * 
 	 * @param children the children operators.
 	 */
-	public Operator(final InnerOperator[] children) {
+	public QueryOperator(final InnerQueryOperator[] children) {
 		this.children = children;
+	}
+
+	
+	/*
+	 * Returns the child, if there is only one.
+	 * @return the child operator.
+	 */
+	public InnerQueryOperator getChild() {
+		assert(children.length == 1);
+		return children[0];
 	}
 	
 	/*
@@ -29,7 +39,7 @@ public abstract class Operator {
 	 * Calls open() for every child operator.
 	 */
 	public void open() throws DatabaseException {
-		for(InnerOperator child: children) {
+		for(InnerQueryOperator child: children) {
 			child.open();
 		}
 	}
@@ -42,7 +52,7 @@ public abstract class Operator {
 	 */
 	public void close() {
 		dispose();
-		for(InnerOperator child: children) {
+		for(InnerQueryOperator child: children) {
 			child.close();
 		}
 	}

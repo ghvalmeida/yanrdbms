@@ -43,7 +43,7 @@ public class ToScreenTest {
 		String current = new File( "." ).getCanonicalPath();
         System.out.println("Current dir:" + current);
 		TextFileScan textFileScan = new TextFileScan(schema, current + "/data/twitter/twitter.txt", null);
-		InnerOperator innerOperator[] = { textFileScan };
+		InnerQueryOperator innerOperator[] = { textFileScan };
 		ToScreen toScreen = new ToScreen( innerOperator );
 		QueryExecutor queryExecutor = new QueryExecutor( toScreen );
 		queryExecutor.execute();

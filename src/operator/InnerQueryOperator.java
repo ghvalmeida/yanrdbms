@@ -10,7 +10,7 @@ import core.Tuple;
  * @author valmeida
  *
  */
-public abstract class InnerOperator extends Operator {
+public abstract class InnerQueryOperator extends QueryOperator {
 	/*
 	 * The schema of the output tuples.
 	 */
@@ -21,7 +21,7 @@ public abstract class InnerOperator extends Operator {
 	 * 
 	 * @param children the children operators.
 	 */
-	public InnerOperator(final Schema outputSchema, final InnerOperator[] children) {
+	public InnerQueryOperator(final Schema outputSchema, final InnerQueryOperator[] children) {
 		super(children);
 		this.outputSchema = outputSchema;
 	}

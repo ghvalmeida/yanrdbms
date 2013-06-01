@@ -19,13 +19,13 @@ import core.Type;
 
 import exception.DatabaseException;
 
-import operator.InnerOperator;
+import operator.InnerQueryOperator;
 
 /**
  * @author valmeida
  *
  */
-public class TextFileScan extends InnerOperator {
+public class TextFileScan extends InnerQueryOperator {
 
 	private final String filename;
 	private final String separator;

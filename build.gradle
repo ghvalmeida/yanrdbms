@@ -1,0 +1,99 @@
+/* This project uses Java and Eclipse. */
+import org.gradle.plugins.ide.eclipse.model.SourceFolder
+apply plugin: "java"
+apply plugin: "eclipse"
+
+/* Set up group and version info for myriad */
+archivesBaseName = "yardbmc"
+version = "0.1"
+
+/* We use Java 1.7 */
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+/* Tell gradle where the source code is located. */
+sourceSets {
+  /* Code for main */
+  main {
+    java.srcDir 'src'
+    java.srcDir 'protobuf/java'
+    //java.srcDir 'third-party-src'
+    //resources.srcDir 'conf'
+    output.classesDir = 'build/main'
+  }
+  /* Code for tests */
+  test {
+    java.srcDir 'test'
+    output.classesDir = 'build/test'
+  }
+}
+
+
+/* Build the Eclipse .classpath file first, because if Gradle's build fails
+ * we'll want to use Eclipse to debug it. */
+test.dependsOn eclipseClasspath
+tasks.eclipseClasspath.dependsOn cleanEclipseClasspath
+
+/*
+ * List the compile and runtime dependencies of all the tests.
+ * Note that "group:name:version" dependencies will be downloaded from Maven.
+ */
+
+/* Where we will fetch external JAR files from. */
+repositories {
+  mavenCentral() /* The standard Java Maven repository. */
+  maven { url "http://maven.restlet.org" } /* Restlet */
+  maven { url "http://clojars.org/repo" } /* Clojars, for MonetDB */
+}
+
+dependencies {
+  compile "com.google.protobuf:protobuf-java:2.4.1"
+  testCompile "junit:junit:4.11"
+}
+
+/* Tell Java to emit all compiler warnings. */
+tasks.withType(Compile) {
+  options.compilerArgs << "-Xlint"
+}
+
+/* The eclipseClasspath task will build a local Eclipse .classpath file. */
+eclipse.classpath {
+  /* Ensure Eclipse compiled output appears in build directory. */
+  defaultOutputDir = file('build/main')
+
+  /* We don't need to download source code. Why not? With sources, it's much
+   * more convenient in debugging.
+   */
+  downloadSources = true
+  downloadJavadoc = true
+
+  file {
+
+    /* Separate output folder for each src folders*/
+    whenMerged {
+      cp ->
+      cp.entries.findAll { it instanceof SourceFolder && it.path.startsWith("src") }*.output = "build/main"
+      cp.entries.findAll { it instanceof SourceFolder && it.path.startsWith("protobuf") }*.output = "build/main"
+      cp.entries.findAll { it instanceof SourceFolder && it.path.startsWith("test") }*.output = "build/test"
+    }
+
+  }
+}
+
+test {
+    /* Optional: uncomment the next line to print which test is running. Useful for debugging. */
+    // beforeTest { desc -> println "Executing test ${desc.name} [${desc.className}]" }
+}
+
+jar {
+  excludes = [ 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA' ] 
+  manifest {
+    attributes("Implementation-Title" : "yardbms",
+               "Implementation-Version": version,
+	       "Main-Class": "yardbms.daemon.Daemon")
+  }
+
+  from configurations.runtime.collect {
+    it.isDirectory() ? it : zipTree(it)
+  }
+}

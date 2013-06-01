@@ -9,9 +9,9 @@ import core.Tuple;
  * @author valmeida
  *
  */
-public class ToScreen extends RootOperator {
+public class ToScreen extends RootQueryOperator {
 
-	public ToScreen(final InnerOperator[] children) {
+	public ToScreen(final InnerQueryOperator[] children) {
 		super(children);
 	}
 

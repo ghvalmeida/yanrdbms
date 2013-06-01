@@ -10,14 +10,14 @@ import core.Tuple;
  * @author valmeida
  *
  */
-abstract public class RootOperator extends Operator {
+abstract public class RootQueryOperator extends QueryOperator {
 
 	/*
 	 * The constructor
 	 * 
 	 * @param children the child operators.
 	 */
-	public RootOperator(final InnerOperator[] children) {
+	public RootQueryOperator(final InnerQueryOperator[] children) {
 		super(children);
 	}
 	

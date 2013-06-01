@@ -5,15 +5,15 @@ package accessmethod;
 
 import core.Schema;
 import core.Tuple;
-import operator.InnerOperator;
+import operator.InnerQueryOperator;
 
 /**
  * @author valmeida
  *
  */
-public final class TableScan extends InnerOperator {
+public final class TableScan extends InnerQueryOperator {
 
-	public TableScan(final Schema outputSchema, final InnerOperator[] children) {
+	public TableScan(final Schema outputSchema, final InnerQueryOperator[] children) {
 		super(outputSchema, children);
 		// TODO Auto-generated constructor stub
 	}
